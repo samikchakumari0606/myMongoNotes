@@ -1,0 +1,18 @@
+// CONNECT MONGODB WITH NODEJS
+
+const {MongoClient}=require("mongodb");
+const url='mongodb://localhost:27017';//need to connect
+const client=new MongoClient(url);
+const database='e-com';//database name
+
+async function getData(){
+    let result=await client.connect();//CLIENT CONNECT
+    let db=result.db(database);//CONNECT DATABASE
+    let collection=db.collection('product');//CONNECT COLLECTION
+    // console.log(collection.find({}).toArray())
+    // let response=await collection.find({}).toArray();//SHOW ALL COLLECTION
+    let response=await collection.find({name:"jio"}).toArray();//one result
+    console.log(response)
+
+}
+getData()
